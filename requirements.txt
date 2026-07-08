@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+effdet
+timm
+torch
+opencv-python
+pillow
+numpy
