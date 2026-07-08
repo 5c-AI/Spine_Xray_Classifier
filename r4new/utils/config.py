@@ -1,7 +1,7 @@
 import os
 SERVICE_NAME = "r4new"
-CKPT = os.getenv("CKPT", "models/r4new_best_model.pth")
-R4_CONFIG = os.getenv("R4_CONFIG", "models/r4new_config.json")
+CKPT = os.getenv("CKPT", "models/Spine_classifier.pth")
+R4_CONFIG = os.getenv("R4_CONFIG", "models/Spine_classifier.json")
 CORE_DIR = os.getenv("CORE_DIR", "/root/SPINE/maira-binary")   # model/data_loader/utils
 THRESHOLD = float(os.getenv("THRESHOLD", "0.0077"))            # recall95, orig GT (0.0102 for SB-ignored)
 IMG = int(os.getenv("IMG", "1024"))
