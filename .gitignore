@@ -1,0 +1,7 @@
+models/*
+!models/.gitkeep
+logs/*
+!logs/.gitkeep
+__pycache__/
+*.pyc
+.env

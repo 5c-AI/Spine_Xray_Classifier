@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+httpx
+transformers
+timm
+torch
+opencv-python
+numpy
