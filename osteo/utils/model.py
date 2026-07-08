@@ -1,7 +1,7 @@
 import sys, torch
 from utils import config as C
 from utils.preprocess import load
-sys.path.append(C.OSTEO_DIR)
+sys.path.insert(0, C.OSTEO_DIR)   # front: OSTEO_DIR's test.py must win over stdlib `test`
 from train import EfficientDetModel, get_valid_transforms
 from test import predict_batch
 class Model:

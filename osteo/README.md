@@ -29,7 +29,7 @@ logs/                 per-study logs (gitignored)
 
 ## Download models
 ```
-models/osteo_effdet_d5.ckpt        # EfficientDet-D5 fine-tuned checkpoint (~390 MB)
+models/osteophytes.ckpt        # EfficientDet-D5 fine-tuned checkpoint (~390 MB)
 ```
 Code dependency: the `EfficientDetModel` + `get_valid_transforms` + `predict_batch` helpers
 (`OSTEO_DIR`, default `/root/SPINE_PATHOLOGIES/OSTEO/effdet`) must be importable — vendor

@@ -30,7 +30,7 @@ logs/                 per-study logs (gitignored)
 
 ## Download models
 ```
-models/lum_yolo11m_seg.pt          # YOLO11m dorsal-lumbar vertebra segmentation (~44 MB)
+models/Vertebra_seg.pt          # YOLO11m dorsal-lumbar vertebra segmentation (~44 MB)
 ```
 Code dependency: the `find_d12_anchor`, `get_vertebrae_below_d12`, `extract_min_area_rect`
 helpers (`LUM_DIR`, default `/root/SPINE_PATHOLOGIES/LUMBARIZATION`) must be importable —

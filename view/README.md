@@ -29,7 +29,7 @@ logs/                 per-study logs (gitignored)
 
 ## Download models
 ```
-models/YOLOCLSS.pt                 # YOLOv8-cls AP/LAT classifier (~3 MB)
+models/Spine_view.pt                 # YOLOv8-cls AP/LAT classifier (~3 MB)
 ```
 No external code dependency (uses `ultralytics` only).
 
