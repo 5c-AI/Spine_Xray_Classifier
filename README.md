@@ -1,27 +1,17 @@
 # spine-ensemble-serving
 
 Serving for the finalized **R4_new + LUM + OSTEO** spine normal/abnormal ensemble.
-**One branch per service** (your convention), each a standalone FastAPI app in the
-`api/ · utils/ · models/ · logs/` skeleton.
+Each service is a self-contained FastAPI app (`api/ · utils/ · models/ · logs/`), one **folder** per service.
+Deployment convention: **push each folder to its own branch** (r4new / osteo / lum / view).
 
-| branch | service | port | role |
+| folder | service | port | role |
 |--------|---------|------|------|
-| `r4new`| RAD-DINO/MAIRA classifier | 8001 | **entry / orchestrator** (clients: osteo, lum, view) |
-| `osteo`| EfficientDet-D5 osteophyte | 8003 | detector |
-| `lum`  | YOLO11m-seg lumbarization  | 8002 | detector (input = AP views from `view`) |
-| `view` | YOLOv8-cls AP/LAT          | 8004 | view router |
+| `r4new/`| RAD-DINO/MAIRA classifier | 8001 | **entry / orchestrator** (clients: osteo, lum, view) |
+| `osteo/`| EfficientDet-D5 osteophyte | 8003 | detector |
+| `lum/`  | YOLO11m-seg lumbarization  | 8002 | detector (input = AP views from `view`) |
+| `view/` | YOLOv8-cls AP/LAT          | 8004 | view router |
 
-Fusion (in `r4new`): `Abnormal iff r4_score >= T OR osteo.osteophyte OR lum.lumbarization`.
+Fusion (in r4new): `Abnormal iff r4_score >= T OR osteo.osteophyte OR lum.lumbarization`.
+Design: batched GPU forward/study · single-flight asyncio.Lock (whole request) · CPU decode + GPU forward-only · wall-clock timing · no queue cap/timeout (~287 studies/day).
 
-Design: batched GPU forward per study; single-flight `asyncio.Lock` per service (held whole
-request); CPU decode/resize/normalize, GPU forward-only; wall-clock timing; no queue cap /
-no per-request timeout (~287 studies/day).
-
-## Deploy each service (from its branch)
-```bash
-git checkout <branch>
-pip install -r requirements.txt
-# put weights in models/ and set paths via env (see utils/config.py)
-uvicorn main:app --host 0.0.0.0 --port <port>
-```
-Bring-up order: view, lum, osteo, then r4new (entry).
+Bring-up order: view, lum, osteo, then r4new.
