@@ -31,9 +31,10 @@ logs/                 per-study logs (gitignored)
 ```
 models/osteophytes.ckpt        # EfficientDet-D5 fine-tuned checkpoint (~390 MB)
 ```
-Code dependency: the `EfficientDetModel` + `get_valid_transforms` + `predict_batch` helpers
-(`OSTEO_DIR`, default `/root/SPINE_PATHOLOGIES/OSTEO/effdet`) must be importable — vendor
-those modules into this repo or `pip install` the effdet package before deploy.
+Code dependency: **vendored** — `EfficientDetModel` + `get_valid_transforms` + `predict_batch`
+live in `osteo/vendor/` (`train.py`, `test.py`), committed with the repo. `OSTEO_DIR` defaults
+to that in-repo path (override via env only if you relocate them). No external `/root` checkout
+needed. The `effdet`/`timm` packages come from `requirements.txt`.
 
 ## Run
 ```bash
