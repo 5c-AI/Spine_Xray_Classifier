@@ -1,8 +1,15 @@
 fastapi
 uvicorn[standard]
+torch
 effdet
 timm
-torch
+pytorch-lightning     # EfficientDetModel subclasses pl.LightningModule
+albumentations        # get_valid_transforms
+ensemble-boxes        # imported by vendored train.py
+scikit-learn          # imported by vendored train.py
+matplotlib            # imported by vendored train.py
+tqdm
 opencv-python
 pillow
+pandas
 numpy

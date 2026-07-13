@@ -1,8 +1,13 @@
 fastapi
 uvicorn[standard]
 httpx
+torch
+torchvision
 transformers
 timm
-torch
+albumentations
 opencv-python
+pillow
+pandas
 numpy
+pydicom            # only if a DICOM is passed; the JPEG pipeline doesn't need it
