@@ -2,7 +2,8 @@ import os
 SERVICE_NAME = "r4new"
 CKPT = os.getenv("CKPT", "models/Spine_classifier.pth")
 R4_CONFIG = os.getenv("R4_CONFIG", "models/Spine_classifier.json")
-CORE_DIR = os.getenv("CORE_DIR", "/root/SPINE/maira-binary")   # model/data_loader/utils
+_SVC = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # service root
+CORE_DIR = os.getenv("CORE_DIR", os.path.join(_SVC, "core"))   # vendored model.py/data_loader.py
 THRESHOLD = float(os.getenv("THRESHOLD", "0.0077"))            # recall95, orig GT (0.0102 for SB-ignored)
 IMG = int(os.getenv("IMG", "1024"))
 DEVICE = os.getenv("DEVICE", "cuda")

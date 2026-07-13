@@ -44,9 +44,19 @@ Weights are **not** in git. Download the following into `models/`
 models/r4new_config.json       # ChestClassifier/RAD-DINO config (arch is built from this)
 models/r4new_best_model.pth    # complete fine-tuned encoder + binary head (~1.0 GB)
 ```
-Note: the base `microsoft/rad-dino-maira-2` tower is used only to **build** the architecture
-(from the HF cache / config); `r4new_best_model.pth` then strict-loads the fine-tuned
-encoder + head over it, so the raw base checkpoint is not otherwise required at serve time.
+Note: the base `microsoft/rad-dino-maira-2` tower is used only to **build** the architecture;
+the fine-tuned `.pth` then loads the encoder + head over it, so the raw base checkpoint is not
+otherwise required at serve time.
+
+Code dependency: **vendored** — `ChestClassifier` (`model.py`) and `build_image_processor` /
+`get_transforms` (`data_loader.py`) live in `r4new/core/`, committed with the repo. `CORE_DIR`
+defaults to that in-repo path. No external `/root` checkout needed.
+
+⚠ **Offline caveat (weights, not code):** building `ChestClassifier` calls
+`AutoModel.from_pretrained("microsoft/rad-dino-maira-2")`, which pulls the base tower from the
+HuggingFace hub on first run. For an air-gapped/offline deploy, pre-populate the HF cache
+(`HF_HOME`) or snapshot that model locally and set `model_name` to the local path — otherwise
+the service needs network access the first time it loads.
 
 ## Run
 ```bash
